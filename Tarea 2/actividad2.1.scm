@@ -19,3 +19,33 @@
         ((< n 0) -1)   
     )
 )
+
+;3. La funcion roots devuelve la raız que resuelve una ecuacion cuadratica a partir de 
+;sus tres coeficiente, a, b y c, que se reciben como entrada.
+ (define (roots a b c)
+
+   (define discriminant
+    (lambda (a b c)
+      (sqrt (- (square b) (* 4 a c)))))
+
+   (define square
+     (lambda (n)
+       (* n n)))
+
+   (/ (+ (- b) (discriminant a b c)) (* 2 a))
+  )
+
+  ;4. El  ́ındice de masa corporal, o BMI por sus siglas in ingl ́es, se utiliza para determinar si la proporcion
+  ; de peso y altura de una persona es adecuada. 
+
+    (define (bmi w h)
+        (define  square
+            (lambda (n)
+                (* n n)))
+                (cond
+                    ((< (/ w (square h)) 20) 'underweight)
+                    ((and(>= (/ w (square h)) 20) (< (/ w (square h)) 25)) 'normal)
+                    ((and(>= (/ w (square h)) 25) (< (/ w (square h)) 30)) 'obese1)
+                    ((and(>= (/ w (square h)) 30) (< (/ w (square h)) 40)) 'obese2)
+                    ((>= (/ w (square h)) 40) 'obese3))
+                    )
