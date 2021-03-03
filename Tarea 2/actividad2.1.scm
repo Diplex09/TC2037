@@ -1,5 +1,5 @@
-;   Abraham Mendoza
-;   Aldo Degollado
+;   Abraham Mendoza A01
+;   Aldo Degollado A01
 ;   Luis Alonso Martínez García A01636255
 
 ; 1. La funcion 'fahrenheit-to-celsius' toma como entrada una temperatura f en grados Fahrenheit 
