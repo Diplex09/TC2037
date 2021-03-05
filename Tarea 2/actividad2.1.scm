@@ -49,3 +49,20 @@
                     ((and(>= (/ w (square h)) 30) (< (/ w (square h)) 40)) 'obese2)
                     ((>= (/ w (square h)) 40) 'obese3))
                     )
+
+;6. La función duplica te toma una lista lst como entrada y devuelve una nueva lista en donde cada elemento de lst está duplicado.
+
+  (define (duplicate lst)
+    (if (null? lst)
+        '()
+        (cons (car lst)
+              (cons (car lst)
+                    (duplicate (cdr lst))))))
+
+;10. La función positives toma una lista de números lst como entrada y devuelve una nueva lista que solocontiene los n ́umeros 
+;positivos de lst.
+
+  (define (positives lst)
+    (cond ((null? lst) '())
+          ((negative? (car lst)) (positives (cdr lst)))
+          (else (cons (car lst) (positives (cdr lst))))))

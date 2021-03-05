@@ -12,8 +12,17 @@
         (else
           (cons (car lst) (insert n (cdr lst))))))
 
-; 6. La funcion deep-reverse toma una lista como entrada. Devuelve una lista con los mismos elementos que su
+; 3. La funcion deep-reverse toma una lista como entrada. Devuelve una lista con los mismos elementos que su
 ; entrada pero en orden inverso. Si hay listas anidadas, estas tambien se invierten.
+
+(define (rotate-left n lst)
+    (cond ((null? lst) lst)
+          ((= n 0) lst)
+          ((negative? n) (rotate-left (+ n 1) (append (list(car (reverse lst))) (reverse (cdr (reverse lst))))))
+          (else (rotate-left (- n 1) (append (cdr lst) (list (car lst)))))))
+
+; 6. La función rotate-left toma dos entradas: un número entero n y una lista lst. Devuelve la lista que resulta de rotar lst un total 
+; de n elementos a la izquierda. Si n es negativo, rota hacia la derecha.
 
 (define (deep-reverse lst)
     (define (deep-reverseR lst acc)
@@ -27,3 +36,9 @@
     )
    (deep-reverseR lst '())
 )
+
+(define (rotate-left n lst)
+    (cond ((null? lst) lst)
+          ((= n 0) lst)
+          ((negative? n) (rotate-left (+ n 1) (append (list(car (reverse lst))) (reverse (cdr (reverse lst))))))
+          (else (rotate-left (- n 1) (append (cdr lst) (list (car lst)))))))
