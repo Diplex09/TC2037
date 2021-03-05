@@ -11,3 +11,19 @@
         ((>= (car lst) n) (cons n lst))
         (else
           (cons (car lst) (insert n (cdr lst))))))
+
+; 6. La funcion deep-reverse toma una lista como entrada. Devuelve una lista con los mismos elementos que su
+; entrada pero en orden inverso. Si hay listas anidadas, estas tambien se invierten.
+
+(define (deep-reverse lst)
+    (define (deep-reverseR lst acc)
+        (if (null? lst)
+            acc
+            (if (list? (car lst))
+                (deep-reverseR (cdr lst) (cons (deep-reverse (car lst)) acc))
+                (deep-reverseR (cdr lst) (cons (car lst) acc))
+            )
+        )
+    )
+   (deep-reverseR lst '())
+)
