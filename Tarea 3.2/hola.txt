@@ -1,15 +1,5 @@
-case 14:
-                        {
-                            found = comment.find(actual);
-                            if(toPrint == "/" && found != std::string::npos && i != lineLength - 1)
-                            {
-                                toPrint = toPrint + actual;
-                                flag = true;
-                                qPosition = 15;
-                            }
-                            else if(found != std::string::npos && i != lineLength - 1)
-                            {
-                                toPrint = toPrint + actual;
-                                flag = true;
-                            }
-                            else if(found != std::string::npos 
+b=7
+
+a = 32.4 *(-8.6 - b)/       6.1E-8
+
+d = a ^ b // Esto es un comentario
