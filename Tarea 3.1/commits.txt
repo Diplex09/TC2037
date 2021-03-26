@@ -4,15 +4,16 @@ a) List the strings in the set XY.
 	{aa, aab, aaab, bb, bbb, bbab}
 
 b) How many strings of length 6 are there in X*?
+	There are a total of 8 string, which are:
 	{aaaaaa, bbbbbb, aaaabb, aabbaa, bbaaaa, aabbbb, bbbbaa, bbaabb}
 
 c) List the strings in the set Y* of length three or less.
 	{λ, b, ab, bb, bab, abb, bbb}
 
 d) List the strings in the set X*Y* of length four or less.
-	X* elements of legth 4 or less ={λ, aa, bb, aaaa, aabb, bbaa, bbbb}
-	Y* elements of legth 4 or less={λ, b, ab, bb, bab, abb, bbb, abab, babb, bbab, abbb, bbbb}
-	Therefore elements of X*Y* of length four or less are:{λ, b, ab, bb, bab, abb, bbb, abab, babb, bbab, abbb, bbbb, aa, aabaaab, aabb, aaaa, aabb, bbaa}
+	for X*={λ, aa, bb, aaaa, aabb, bbaa, bbbb}
+	for Y*={λ, b, ab, bb, bab, abb, bbb, abab, babb, bbab, abbb, bbbb}
+	X*Y*:{λ, b, ab, bb, bab, abb, bbb, abab, babb, bbab, abbb, bbbb, aa, aabaaab, aabb, aaaa, aabb, bbaa}
 
 14. The set of strings over {a, b,c) in which all the a’s precede the b’s, which in turn precede the c’s. It is possible that there are no a’s, b’s, or c's.
 	a^* b^* c^*
