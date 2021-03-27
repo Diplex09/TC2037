@@ -27,6 +27,7 @@ void lexerArithmetic(std::string fileName)
     std::string letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWZYZ";
     std::string operators = "+-*^()="; // q7, q8, q9, q10, q11, q12 and q13
     std::string comment = "/"; // q14
+    std::string delimiters = " \n\t+-*^()=/";
     std::string toPrint;
     char actual;
     int lineLength = 0;
@@ -60,7 +61,7 @@ void lexerArithmetic(std::string fileName)
         {
             flag = false;
             actual = line[i];
-            if((actual != ' ' && actual != '\n') || (actual == ' ' && qPosition == 15))
+            if((actual != ' ' && actual != '\n' && actual != '\t') || ((actual == ' ' || actual == '\t') && qPosition == 15 ) || (!invalidChar && qPosition == 1))
             {
                 while(!flag)
                 {
@@ -74,12 +75,39 @@ void lexerArithmetic(std::string fileName)
                             if(found != std::string::npos)
                             {
                                 // Check if we are dragging an error
-                                if(invalidChar)
+                                if(invalidChar && (actual != ' ' || actual != '\n' || actual != '\t' || operators.find(actual) == std::string::npos || comment.find(actual) == std::string::npos))
+                                {
+                                    if(i != lineLength - 1)
+                                    {
+                                        toPrint = toPrint + actual;
+                                        flag = true;
+                                    }
+                                    else
+                                    {
+                                        toPrint = toPrint + actual;
+                                        std::cout << toPrint << std::setw(30) << "Error" << std::endl;
+                                        toPrint.clear();
+                                        invalidChar = false;
+                                        qPosition = 0;
+                                        flag = true;
+                                    }
+                                }
+                                else if(invalidChar && (actual == ' ' || actual == '\n' || actual == '\t'))
                                 {
                                     std::cout << toPrint << std::setw(30) << "Error" << std::endl;
-                                    toPrint = "";
+                                    toPrint.clear();
+                                    qPosition = 0;
+                                    invalidChar = false;
+                                    flag = true;
                                 }
-                                if(comment.find(q0[found]) != std::string::npos)
+                                else if(invalidChar && (operators.find(actual) != std::string::npos || comment.find(actual) != std::string::npos))
+                                {
+                                    std::cout << toPrint << std::setw(30) << "Error" << std::endl;
+                                    toPrint.clear();
+                                    qPosition = 0;
+                                    invalidChar = false;
+                                }
+                                else if(comment.find(q0[found]) != std::string::npos)
                                 {
                                     qPosition = 14;
                                 }
@@ -162,7 +190,7 @@ void lexerArithmetic(std::string fileName)
                                     std::cout << toPrint << std::setw(30) << "Error" << std::endl;
                                     invalidChar = false;
                                     flag = true;
-                                    toPrint = "";
+                                    toPrint.clear();
                                 }
                             }
                             break;
@@ -170,25 +198,69 @@ void lexerArithmetic(std::string fileName)
                         // The character(s) is(are) a variable
                         case 1:
                         {
-                            found = q1.find(actual);
-                            if(found != std::string::npos && i != lineLength - 1)
+                            if(invalidChar && (actual != ' ' || actual != '\n' || actual != '\t' || operators.find(actual) == std::string::npos || comment.find(actual) == std::string::npos))
                             {
                                 toPrint = toPrint + actual;
                                 flag = true;
                             }
-                            else if(found != std::string::npos && i == lineLength - 1)
+                            else if(invalidChar && (actual == ' ' || actual == '\n' || actual == '\t'))
                             {
-                                toPrint = toPrint + actual;
+                                std::cout << toPrint << std::setw(30) << "Error" << std::endl;
+                                toPrint.clear();
+                                qPosition = 0;
+                                invalidChar = false;
+                                flag = true;
+                            }
+                            else if(invalidChar && (operators.find(actual) != std::string::npos || comment.find(actual) != std::string::npos))
+                            {
+                                std::cout << toPrint << std::setw(30) << "Error" << std::endl;
+                                toPrint.clear();
+                                qPosition = 0;
+                                invalidChar = false;
+                            }
+                            else if(!invalidChar && (actual == ' ' || actual == '\n' || actual == '\t'))
+                            {
                                 std::cout << toPrint << std::setw(30) << "Variable" << std::endl;
+                                toPrint.clear();
                                 qPosition = 0;
                                 flag = true;
-                                toPrint = "";
+                            }
+                            else if(!invalidChar && (operators.find(actual) != std::string::npos || comment.find(actual) != std::string::npos))
+                            {
+                                std::cout << toPrint << std::setw(30) << "Variable" << std::endl;
+                                toPrint.clear();
+                                qPosition = 0;
                             }
                             else
                             {
-                                std::cout << toPrint << std::setw(30) << "Variable" << std::endl;
-                                qPosition = 0;
-                                toPrint = "";
+                                found = q1.find(actual);
+                                if(found != std::string::npos && i != lineLength - 1)
+                                {
+                                    toPrint = toPrint + actual;
+                                    flag = true;
+                                }
+                                else if(found != std::string::npos && i == lineLength - 1)
+                                {
+                                    toPrint = toPrint + actual;
+                                    std::cout << toPrint << std::setw(30) << "Variable" << std::endl;
+                                    qPosition = 0;
+                                    flag = true;
+                                    toPrint.clear();
+                                }
+                                else if(i == lineLength - 1)
+                                {
+                                    toPrint = toPrint + actual;
+                                    std::cout << toPrint << std::setw(30) << "Error" << std::endl;
+                                    toPrint.clear();
+                                    flag = true;
+                                    qPosition = 0;
+                                }
+                                else
+                                {
+                                    toPrint = toPrint + actual;
+                                    invalidChar = true;
+                                    flag = true;
+                                }
                             }
                             break;
                         }
@@ -213,52 +285,98 @@ void lexerArithmetic(std::string fileName)
                                 std::cout << toPrint << std::setw(30) << "Entero" << std::endl;
                                 qPosition = 0;
                                 flag = true;
-                                toPrint = "";
+                                toPrint.clear();
                             }
                             else
                             {
                                 std::cout << toPrint << std::setw(30) << "Entero" << std::endl;
                                 qPosition = 0;
-                                toPrint = "";
+                                toPrint.clear();
                             }
                             break;
                         }
                         // The characters are a floating real number
                         case 3:
                         {
-                            found = q3.find(actual);
-                            if(actual == 'E' || actual == 'e')
+                            if(invalidChar && (actual != ' ' || actual != '\n' || actual != '\t' || operators.find(actual) == std::string::npos || comment.find(actual) == std::string::npos))
                             {
-                                toPrint = toPrint + actual;
-                                flag = true;
-                                qPosition = 4;
+                                if(i != lineLength - 1)
+                                {
+                                    toPrint = toPrint + actual;
+                                    flag = true;
+                                }
+                                else
+                                {
+                                    toPrint = toPrint + actual;
+                                    std::cout << toPrint << std::setw(30) << "Error" << std::endl;
+                                    toPrint.clear();
+                                    invalidChar = false;
+                                    qPosition = 0;
+                                    flag = true;
+                                }
                             }
-                            else if(found != std::string::npos && i != lineLength - 1)
+                            else if(invalidChar && (actual == ' ' || actual == '\n' || actual == '\t'))
                             {
-                                toPrint = toPrint + actual;
-                                flag = true;
-                            }
-                            else if(found != std::string::npos && i == lineLength - 1)
-                            {
-                                toPrint = toPrint + actual;
-                                std::cout << toPrint << std::setw(30) << "Real" << std::endl;
-                                qPosition = 0;
-                                flag = true;
-                                toPrint = "";
-                            }
-                            else if(actual == '.')
-                            {
-                                toPrint = toPrint + actual;
                                 std::cout << toPrint << std::setw(30) << "Error" << std::endl;
+                                toPrint.clear();
+                                qPosition = 0;
+                                invalidChar = false;
+                                flag = true;
+                            }
+                            else if(invalidChar && (operators.find(actual) != std::string::npos || comment.find(actual) != std::string::npos))
+                            {
+                                std::cout << toPrint << std::setw(30) << "Error" << std::endl;
+                                toPrint.clear();
+                                qPosition = 0;
+                                invalidChar = false;
+                            }
+                            else if(!invalidChar && (actual == ' ' || actual == '\n' || actual == '\t'))
+                            {
+                                std::cout << toPrint << std::setw(30) << "Variable" << std::endl;
+                                toPrint.clear();
                                 qPosition = 0;
                                 flag = true;
-                                toPrint = "";
+                            }
+                            else if(!invalidChar && (operators.find(actual) != std::string::npos || comment.find(actual) != std::string::npos))
+                            {
+                                std::cout << toPrint << std::setw(30) << "Variable" << std::endl;
+                                toPrint.clear();
+                                qPosition = 0;
                             }
                             else
                             {
-                                std::cout << toPrint << std::setw(30) << "Real" << std::endl;
-                                qPosition = 0;
-                                toPrint = "";
+                                found = q3.find(actual);
+                                if(actual == 'E' || actual == 'e')
+                                {
+                                    toPrint = toPrint + actual;
+                                    flag = true;
+                                    qPosition = 4;
+                                }
+                                else if(found != std::string::npos && i != lineLength - 1)
+                                {
+                                    toPrint = toPrint + actual;
+                                    flag = true;
+                                }
+                                else if(found != std::string::npos && i == lineLength - 1)
+                                {
+                                    toPrint = toPrint + actual;
+                                    std::cout << toPrint << std::setw(30) << "Real" << std::endl;
+                                    qPosition = 0;
+                                    flag = true;
+                                    toPrint.clear();
+                                }
+                                else if(actual == '.')
+                                {
+                                    toPrint = toPrint + actual;
+                                    flag = true;
+                                    invalidChar = true;
+                                }
+                                else
+                                {
+                                    std::cout << toPrint << std::setw(30) << "Real" << std::endl;
+                                    qPosition = 0;
+                                    toPrint.clear();
+                                }
                             }
                             break;
                         }
@@ -289,7 +407,7 @@ void lexerArithmetic(std::string fileName)
                             {
                                 std::cout << toPrint << std::setw(30) << "Error" << std::endl;
                                 qPosition = 0;
-                                toPrint = "";
+                                toPrint.clear();
                             }
                             break;
                         }
@@ -314,7 +432,7 @@ void lexerArithmetic(std::string fileName)
                             {
                                 std::cout << toPrint << std::setw(30) << "Error" << std::endl;
                                 qPosition = 0;
-                                toPrint = "";
+                                toPrint.clear();
                             }
                             break;
                         }
@@ -333,13 +451,13 @@ void lexerArithmetic(std::string fileName)
                                 std::cout << toPrint << std::setw(30) << "Real" << std::endl;
                                 qPosition = 0;
                                 flag = true;
-                                toPrint = "";
+                                toPrint.clear();
                             }
                             else
                             {
                                 std::cout << toPrint << std::setw(30) << "Real" << std::endl;
                                 qPosition = 0;
-                                toPrint = "";
+                                toPrint.clear();
                             }
                             break;
                         }
@@ -364,13 +482,13 @@ void lexerArithmetic(std::string fileName)
                                 std::cout << toPrint << std::setw(30) << "Division" << std::endl;
                                 qPosition = 0;
                                 flag = true;
-                                toPrint = "";
+                                toPrint.clear();
                             }
                             else
                             {
                                 std::cout << toPrint << std::setw(30) << "Division" << std::endl;
                                 qPosition = 0;
-                                toPrint = "";
+                                toPrint.clear();
                             }
                             break;
                         }
@@ -388,12 +506,27 @@ void lexerArithmetic(std::string fileName)
                                 std::cout << toPrint << std::setw(30) << "Comentario" << std::endl;
                                 qPosition = 0;
                                 flag = true;
-                                toPrint = "";
+                                toPrint.clear();
                             }
                             break;
                         }
                     }
                 }
+            }
+            else if(invalidChar == true && (actual == ' ' || actual == '\n' || actual == '\t'))
+            {
+                std::cout << toPrint << std::setw(30) << "Error" << std::endl;
+                toPrint.clear();
+                invalidChar = false;
+                qPosition = 0;
+                flag = true;
+            }
+            else if(invalidChar)
+            {
+                std::cout << toPrint << std::setw(30) << "Error" << std::endl;
+                invalidChar = false;
+                toPrint.clear();
+                qPosition = 0;
             }
         }
     }
