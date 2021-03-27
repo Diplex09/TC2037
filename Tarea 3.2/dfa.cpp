@@ -60,7 +60,7 @@ void lexerArithmetic(std::string fileName)
         {
             flag = false;
             actual = line[i];
-            if((actual != ' ' && actual != '\n' && actual != '\t') || ((actual == ' ' || actual == '\t') && qPosition == 15 ) || (!invalidChar && qPosition == 1))
+            if((actual != ' ' && actual != '\n' && actual != '\t') || ((actual == ' ' || actual == '\t') && qPosition == 15 ) || (!invalidChar && qPosition == 1) || ((actual == ' ' || actual == '\t') && qPosition == 14))
             {
                 while(!flag)
                 {
@@ -74,7 +74,7 @@ void lexerArithmetic(std::string fileName)
                             if(found != std::string::npos)
                             {
                                 // Check if we are dragging an error
-                                if(invalidChar && (actual != ' ' || actual != '\n' || actual != '\t' || operators.find(actual) == std::string::npos || comment.find(actual) == std::string::npos))
+                                if(invalidChar && (actual != ' ' && actual != '\n' && actual != '\t' && operators.find(actual) == std::string::npos && comment.find(actual) == std::string::npos))
                                 {
                                     if(i != lineLength - 1)
                                     {
@@ -470,6 +470,14 @@ void lexerArithmetic(std::string fileName)
                                 flag = true;
                                 qPosition = 15;
                             }
+                            else if(toPrint == "/" && found != std::string::npos && i == lineLength - 1)
+                            {
+                                toPrint = toPrint + actual;
+                                std::cout << toPrint << std::setw(30) << "Comentario" << std::endl;
+                                toPrint.clear();
+                                qPosition = 0;
+                                flag = true;
+                            }
                             else if(found != std::string::npos && i != lineLength - 1)
                             {
                                 toPrint = toPrint + actual;
@@ -482,6 +490,13 @@ void lexerArithmetic(std::string fileName)
                                 qPosition = 0;
                                 flag = true;
                                 toPrint.clear();
+                            }
+                            else if(actual == ' ' || actual == '\t')
+                            {
+                                std::cout << toPrint << std::setw(30) << "Division" << std::endl;
+                                qPosition = 0;
+                                toPrint.clear();
+                                flag = true;
                             }
                             else
                             {
