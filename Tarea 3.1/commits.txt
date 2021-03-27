@@ -1,3 +1,10 @@
+Actividad 3.2 - Programando un DFA
+
+Luis Alonso Martínez García - A01636255
+Abraham Mendoza Pérez - A01274857
+Aldo Alejandro Degollado Padilla - A01638391
+
+
 4. Let X = (aa, bb) and Y = {λ, b, ab).
 
 a) List the strings in the set XY.
@@ -26,5 +33,7 @@ d) List the strings in the set X*Y* of length four or less.
 17. The set of strings over (a, b, c} with length less than three:
 
 18. The set of strings over (a, b,c) with length greater than three.
+	(a+b+c)(a+b+c)(a+b+c)(a+b+c)^+
 
 19. The set of strings over {a, b} that contain the substring ab and have length greater than two.
+	(a+b)*a(a+b)*b(a+b)*

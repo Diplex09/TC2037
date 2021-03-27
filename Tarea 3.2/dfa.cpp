@@ -17,7 +17,7 @@ void lexerArithmetic(std::string fileName)
 {
     std::string line;
     std::ifstream expressionsFile;
-    std::string sigma = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789=+-*/^_().";
+    // std::string sigma = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789=+-*/^_().";
     std::string q0 = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWZYZ0123456789=+-*/^()";
     std::string q1 = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWZYZ0123456789_";
     std::string q2 = "0123456789.";
@@ -27,7 +27,6 @@ void lexerArithmetic(std::string fileName)
     std::string letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWZYZ";
     std::string operators = "+-*^()="; // q7, q8, q9, q10, q11, q12 and q13
     std::string comment = "/"; // q14
-    std::string delimiters = " \n\t+-*^()=/";
     std::string toPrint;
     char actual;
     int lineLength = 0;
