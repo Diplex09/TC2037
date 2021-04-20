@@ -20,31 +20,37 @@ void printError(std::string toPrint, int qPosition, std::ostream& stream)
     {
         case 0:
         {
+            stream << "\t\t<span class=\"errors\">" << toPrint << "</span>" << std::endl;
             std::cout << toPrint << std::setw(30) << "Error: Invalid initial char" << std::endl;
             break;
         }
         case 1:
         {
+            stream << "\t\t<span class=\"errors\">" << toPrint << "</span>" << std::endl;
             std::cout << toPrint << std::setw(30) << "Error: Invalid integer number" << std::endl;
             break;
         }
         case 2:
         {
+            stream << "\t\t<span class=\"errors\">" << toPrint << "</span>" << std::endl;
             std::cout << toPrint << std::setw(30) << "Error: Invalid decimal number" << std::endl;
             break;
         }
         case 7:
         {
+            stream << "\t\t<span class=\"errors\">" << toPrint << "</span>" << std::endl;
             std::cout << toPrint << std::setw(30) << "Error: Invalid logical expression" << std::endl;
             break;
         }
         case 20:
         {
+            stream << "\t\t<span class=\"errors\">" << toPrint << "</span>" << std::endl;
             std::cout << toPrint << std::setw(30) << "Error: Invalid variable" << std::endl;
             break;
         }
         default:
         {
+            stream << "\t\t<span class=\"errors\">" << toPrint << "</span>" << std::endl;
             std::cout << toPrint << std::setw(30) << "Error: Invalid exponential number" << std::endl;
             break;
         }
@@ -54,28 +60,28 @@ void printError(std::string toPrint, int qPosition, std::ostream& stream)
 // Prints the set of chars as an error caused by an invalid char in the language 
 void printInvalidChar(std::string toPrint, std::ostream& stream)
 {
-    stream << "\t\t<span class=\"errors\">" << toPrint << "</span> <br>" << std::endl;
+    stream << "\t\t<span class=\"errors\">" << toPrint << "</span>" << std::endl;
     std::cout << toPrint << std::setw(30) << "Error: Invalid character" << std::endl;
 }
 
 // Prints the set of chars as a variable
 void printVariable(std::string toPrint, std::ostream& stream)
 {
-    stream << "\t\t<span class=\"identifiers\">" << toPrint << "</span> <br>" << std::endl;
+    stream << "\t\t<span class=\"identifiers\">" << toPrint << "</span>" << std::endl;
     std::cout << toPrint << std::setw(30) << "Variable" << std::endl;
 }
 
 // Prints the set of chars as an integer number 
 void printInteger(std::string toPrint, std::ostream& stream)
 {
-    stream << "\t\t<span class=\"numbers\">" << toPrint << "</span> <br>" << std::endl;
+    stream << "\t\t<span class=\"numbers\">" << toPrint << "</span>" << std::endl;
     std::cout << toPrint << std::setw(30) << "Entero" << std::endl;
 }
 
 // Prints the set of chars as a real decimal number
 void printReal(std::string toPrint, std::ostream& stream)
 {
-    stream << "\t\t<span class=\"numbers\">" << toPrint << "</span> <br>" << std::endl;
+    stream << "\t\t<span class=\"numbers\">" << toPrint << "</span>" << std::endl;
     std::cout << toPrint << std::setw(30) << "Real" << std::endl;
 }
 
@@ -86,49 +92,49 @@ void printOperator(char toPrint, std::ostream& stream)
     {
         case '=':
         {
-            stream << "\t\t<span class=\"operators\">" << toPrint << "</span> <br>" << std::endl;
+            stream << "\t\t<span class=\"operators\">" << toPrint << "</span>" << std::endl;
             std::cout << toPrint << std::setw(30) << "Asignacion" << std::endl;
             break;
         }
         case '+':
         {
-            stream << "\t\t<span class=\"operators\">" << toPrint << "</span> <br>" << std::endl;
+            stream << "\t\t<span class=\"operators\">" << toPrint << "</span>" << std::endl;
             std::cout << toPrint << std::setw(30) << "Suma" << std::endl;
             break;
         }
         case '-':
         {
-            stream << "\t\t<span class=\"operators\">" << toPrint << "</span> <br>" << std::endl;
+            stream << "\t\t<span class=\"operators\">" << toPrint << "</span>" << std::endl;
             std::cout << toPrint << std::setw(30) << "Resta" << std::endl;
             break;
         }
         case '*':
         {
-            stream << "\t\t<span class=\"operators\">" << toPrint << "</span> <br>" << std::endl;
+            stream << "\t\t<span class=\"operators\">" << toPrint << "</span>" << std::endl;
             std::cout << toPrint << std::setw(30) << "Multiplicacion" << std::endl;
             break;
         }
         case '/':
         {
-            stream << "\t\t<span class=\"operators\">" << toPrint << "</span> <br>" << std::endl;
+            stream << "\t\t<span class=\"operators\">" << toPrint << "</span>" << std::endl;
             std::cout << toPrint << std::setw(30) << "Division" << std::endl;
             break;
         }
         case '^':
         {
-            stream << "\t\t<span class=\"operators\">" << toPrint << "</span> <br>" << std::endl;
+            stream << "\t\t<span class=\"operators\">" << toPrint << "</span>" << std::endl;
             std::cout << toPrint << std::setw(30) << "Potencia" << std::endl;
             break;
         }
         case '(':
         {
-            stream << "\t\t<span class=\"special-chars\">" << toPrint << "</span> <br>" << std::endl;
+            stream << "\t\t<span class=\"special-chars\">" << toPrint << "</span>" << std::endl;
             std::cout << toPrint << std::setw(30) << "Parentesis de apertura" << std::endl;
             break;
         }
         case ')':
         {
-            stream << "\t\t<span class=\"special-chars\">" << toPrint << "</span> <br>" << std::endl;
+            stream << "\t\t<span class=\"special-chars\">" << toPrint << "</span>" << std::endl;
             std::cout << toPrint << std::setw(30) << "Parentesis de cierre" << std::endl;
             break;
         }
@@ -138,28 +144,28 @@ void printOperator(char toPrint, std::ostream& stream)
 // Prints the set of chars as a logical expression
 void printLogical(std::string toPrint, std::ostream& stream)
 {
-    stream << "\t\t<span class=\"logicals\">" << toPrint << "</span> <br>" << std::endl;
+    stream << "\t\t<span class=\"logicals\">" << toPrint << "</span>" << std::endl;
     std::cout << toPrint << std::setw(30) << "Logico" << std::endl;
 }
 
 // Prints the set of chars as a symbol
 void printSymbol(std::string toPrint, std::ostream& stream)
 {
-    stream << "\t\t<span class=\"symbols\">" << toPrint << "</span> <br>" << std::endl;
+    stream << "\t\t<span class=\"symbols\">" << toPrint << "</span>" << std::endl;
     std::cout << toPrint << std::setw(30) << "Simbolo" << std::endl;
 }
 
 // Prints the set of chars as a reserved word
 void printReservedWord(std::string toPrint, std::ostream& stream)
 {
-    stream << "\t\t<span class=\"reserved-words\">" << toPrint << "</span> <br>" << std::endl;
+    stream << "\t\t<span class=\"reserved-words\">" << toPrint << "</span>" << std::endl;
     std::cout << toPrint << std::setw(30) << "Palabra reservada" << std::endl;
 }
 
 // Prints the set of chars as a comment
 void printComment(std::string toPrint, std::ostream& stream)
 {
-    stream << "\t\t<span class=\"comments\">" << toPrint << "</span> <br>" << std::endl;
+    stream << "\t\t<span class=\"comments\">" << toPrint << "</span>" << std::endl;
     std::cout << toPrint << std::setw(30) << "Comentario" << std::endl;
 }
 
@@ -658,6 +664,7 @@ void lexerArithmetic(std::string fileName)
                 }
             }
         }
+        outputFile << "\t\t<br>" << std::endl;
     }
     outputFile << "\t</main>" << std::endl;
     outputFile << "</body>" << std::endl;
