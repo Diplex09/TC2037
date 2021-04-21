@@ -180,10 +180,10 @@ void lexerArithmetic(std::string fileName)
     std::string q2 = "0123456789eE";                                                                            // All the elements accepted in q2
     std::string q3 = "0123456789-";                                                                             // All the elements accepted in q3
     std::string numbers = "0123456789";                                                                         // All the elements accepted in q4 and q5
-    std::string q7 = "tfTF";                                                                                    // All the elements accepted in q7
-    std::string operators = "=+-*/^()";                                                                         // All the elements accepted in q10, q11, q12, q13, q14, q15, q16, and q17
-    std::string comment = ";";                                                                                  // All the elements accepted in q18
-    std::string q20 = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWZYZ0123456789_";                        // All the elements accepted in q20prueba
+    std::string q7 = "tf";                                                                                      // All the elements accepted in q7
+    std::string operators = "=+-*/^()";                                                                         // All the elements accepted in q11, q12, q13, q14, q15, q16, q17, and q18
+    std::string comment = ";";                                                                                  // All the elements accepted in q19
+    std::string q21 = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWZYZ0123456789_";                        // All the elements accepted in q21
     std::string delimiters = "+-*^()=/;\n\t ";                                                                  // All the elements that delimit a set of chars
     std::string ignoreUnlessComment = "\n\t ";                                                                  // All the elements that wont appear in a set of chars, unless it's inside a comment
     std::string toPrint;                                                                                        // Stores the set of chars to print
@@ -194,6 +194,7 @@ void lexerArithmetic(std::string fileName)
     bool hasInvalidChar = false;                                                                                // Determines if a set of chars has a invalid one in the language
     bool hasError = false;                                                                                      // Determines if the set of chars has a mistake 
     bool isFirstChar = true;                                                                                    // Determines if the current char is the first char of a set
+    bool symbolHasAtLeastOneChar = false;                                                                       // Determines if the current set of chars is a valid symbol
 
     // Open the file to analyze given by user
     expressionsFile.open(fileName, std::ios::in);
@@ -234,7 +235,7 @@ void lexerArithmetic(std::string fileName)
                     readNextChar = true;
                 }
                 // Only the errors followed by a delimiter that are not inside a comment fail this if (this means that the error needs to be printed) 
-                if(!((hasInvalidChar || hasError) && (delimiters.find(current) != std::string::npos || i == lineLength - 1) && (qPosition != 18 && qPosition != 8)))
+                if(!((hasInvalidChar || hasError) && (delimiters.find(current) != std::string::npos || i == lineLength - 1) && qPosition != 19))
                 {
                     // Switch the state of the automaton
                     switch(qPosition)
@@ -276,7 +277,7 @@ void lexerArithmetic(std::string fileName)
                             // Verifies if the char is a diagonal, if true, goes to state q14 of the automaton
                             else if(comment.find(current) != std::string::npos)
                             {
-                                qPosition = 18;
+                                qPosition = 19;
                                 isFirstChar = true;
                             }
                             // Verifies if the char is a number, if true, goes to state q2 of the automaton
@@ -296,7 +297,7 @@ void lexerArithmetic(std::string fileName)
                             // The only way to get here is if the char is a variable, goes to state q1 of the automaton
                             else
                             {
-                                qPosition = 20;
+                                qPosition = 21;
                                 isFirstChar = true;
                             }
                             break;
@@ -502,7 +503,6 @@ void lexerArithmetic(std::string fileName)
                             }
                             break;
                         }
-                        
                         case 6:
                         {
                             toPrint = toPrint + current;
@@ -561,18 +561,29 @@ void lexerArithmetic(std::string fileName)
                             }
                             else if(ignoreUnlessComment.find(current) != std::string::npos)
                             {
-                                printSymbol(toPrint, outputFile);
-                                toPrint.clear();
-                                qPosition = 0;
+                                if(symbolHasAtLeastOneChar)
+                                {
+                                    printSymbol(toPrint, outputFile);
+                                    toPrint.clear();
+                                    symbolHasAtLeastOneChar = false;
+                                    qPosition = 0;
+                                }
+                                else
+                                {
+                                    hasError = true;
+                                    readNextChar = false;
+                                    std::cout << "Hola" << std::endl;
+                                }
                             }
                             else
                             {
                                 toPrint = toPrint + current;
+                                symbolHasAtLeastOneChar = true;
                                 readNextChar = true;
                             }
                             break;
                         }
-                        case 18:
+                        case 19:
                         {
                             if(isFirstChar)
                             {
@@ -601,10 +612,10 @@ void lexerArithmetic(std::string fileName)
                             break;
                         }
                         // The char/set of chars constitutes a variable
-                        case 20:
+                        case 21:
                         {
                             // Verifies if the current char is accepted in the state q1 of the automaton
-                            if(q20.find(current) != std::string::npos)
+                            if(q21.find(current) != std::string::npos)
                             {
                                 toPrint = toPrint + current;
                                 readNextChar = true;
@@ -641,7 +652,7 @@ void lexerArithmetic(std::string fileName)
                 // Only the erros that need to be printed arrive here
                 else 
                 {
-                    // Verifies if the current char is a delimiter, if false, it adds the char to the current seto of chars
+                    // Verifies if the current char is a delimiter, if false, it adds the char to the current set of chars
                     if(delimiters.find(current) == std::string::npos)
                     {
                         toPrint = toPrint + current;
@@ -659,7 +670,7 @@ void lexerArithmetic(std::string fileName)
                     // The cause of the error was a invalid char in a certain state of the automaton, therefore, it prints the set of chars as a certain error depending on the state of the automaton 
                     else
                     {
-                        printError(toPrint,qPosition, outputFile);
+                        printError(toPrint, qPosition, outputFile);
                         toPrint.clear();
                         qPosition = 0;
                         hasError = false;
