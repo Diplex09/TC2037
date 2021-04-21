@@ -184,7 +184,7 @@ void lexerArithmetic(std::string fileName)
     std::string operators = "=+-*/^()";                                                                         // All the elements accepted in q10, q11, q12, q13, q14, q15, q16, and q17
     std::string comment = ";";                                                                                  // All the elements accepted in q18
     std::string q20 = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWZYZ0123456789_";                        // All the elements accepted in q20prueba
-    std::string delimiters = "+-*^()=/';\n\t ";                                                                 // All the elements that delimit a set of chars
+    std::string delimiters = "+-*^()=/;\n\t ";                                                                 // All the elements that delimit a set of chars
     std::string ignoreUnlessComment = "\n\t ";                                                                  // All the elements that wont appear in a set of chars, unless it's inside a comment
     std::string toPrint;                                                                                        // Stores the set of chars to print
     char current;                                                                                               // Stores the current char for reading
@@ -208,7 +208,7 @@ void lexerArithmetic(std::string fileName)
     outputFile << "\t<title>DFA SYNTATIC HIGHLIGHTER</title>" << std::endl;
     outputFile << "</head>" << std::endl << std::endl;
     outputFile << "<body>" << std::endl;
-    outputFile << "\t<main>" << std::endl;
+    outputFile << "\t<main class=\"no-space\">" << std::endl;
 
     // Asks the name of the file to analyze until the user inputs it correctly
     while(expressionsFile.fail())
@@ -257,6 +257,14 @@ void lexerArithmetic(std::string fileName)
                             // Ignores tabs, spaces, and line breaks unless they are inside of a comment
                             if(ignoreUnlessComment.find(current) != std::string::npos)
                             {
+                                if(current == ' ')
+                                {
+                                    outputFile << "\t\t<span>&nbsp</span>" << std::endl;
+                                }
+                                else if(current == '\t')
+                                {
+                                    outputFile << "\t\t<span>&nbsp&nbsp&nbsp</span>" << std::endl;
+                                }
                                 readNextChar = true;
                             }
                             // Verifies if the char is valid as an initial char, if false, it generates an error
@@ -584,6 +592,14 @@ void lexerArithmetic(std::string fileName)
                                 toPrint = toPrint + current;
                                 isFirstChar = false;
                             }
+                            else if(current == ' ')
+                            {
+                                toPrint = toPrint + "&nbsp;";
+                            }
+                            else if(current == '\t')
+                            {
+                                toPrint = toPrint + "&nbsp&nbsp&nbsp;";
+                            }
                             else if(current == '\n')
                             {
                                 printComment(toPrint, outputFile);
@@ -664,7 +680,7 @@ void lexerArithmetic(std::string fileName)
                 }
             }
         }
-        outputFile << "\t\t<br>" << std::endl;
+        outputFile << "\t\t<span><br></span>" << std::endl;
     }
     outputFile << "\t</main>" << std::endl;
     outputFile << "</body>" << std::endl;
