@@ -13,6 +13,28 @@
 #include <string>
 #include <iomanip>
 
+// Prints the header and basic HTML tags in the output file
+void printHtmlInfoAndOpeningTags(std::ostream& stream)
+{
+    stream << "<!DOCTYPE html>" << std::endl;
+    stream << "<html lang=\"en\">" << std::endl;
+    stream << "<head>" << std::endl;
+    stream << "\t<meta charset=\"UTF-8\">" << std::endl;
+    stream << "\t<link rel=\"stylesheet\" href=\"styles.css\">" << std::endl;
+    stream << "\t<title>DFA SYNTATIC HIGHLIGHTER</title>" << std::endl;
+    stream << "</head>" << std::endl << std::endl;
+    stream << "<body>" << std::endl;
+    stream << "\t<main class=\"no-space\">" << std::endl;
+}
+
+// Print the closing tags for the html file to work
+void printHtmlClosingTags(std::ostream& stream)
+{
+    stream << "\t</main>" << std::endl;
+    stream << "</body>" << std::endl;
+    stream << "</html>" << std::endl;
+}
+
 // Prints the set of chars as an error depending on the state of the automaton from which it originated
 void printError(std::string toPrint, int qPosition, std::ostream& stream)
 {
@@ -21,37 +43,31 @@ void printError(std::string toPrint, int qPosition, std::ostream& stream)
         case 0:
         {
             stream << "\t\t<span class=\"errors\">" << toPrint << "</span>" << std::endl;
-            std::cout << toPrint << std::setw(30) << "Error: Invalid initial char" << std::endl;
             break;
         }
         case 1:
         {
             stream << "\t\t<span class=\"errors\">" << toPrint << "</span>" << std::endl;
-            std::cout << toPrint << std::setw(30) << "Error: Invalid integer number" << std::endl;
             break;
         }
         case 2:
         {
             stream << "\t\t<span class=\"errors\">" << toPrint << "</span>" << std::endl;
-            std::cout << toPrint << std::setw(30) << "Error: Invalid decimal number" << std::endl;
             break;
         }
         case 7:
         {
             stream << "\t\t<span class=\"errors\">" << toPrint << "</span>" << std::endl;
-            std::cout << toPrint << std::setw(30) << "Error: Invalid logical expression" << std::endl;
             break;
         }
         case 20:
         {
             stream << "\t\t<span class=\"errors\">" << toPrint << "</span>" << std::endl;
-            std::cout << toPrint << std::setw(30) << "Error: Invalid variable" << std::endl;
             break;
         }
         default:
         {
             stream << "\t\t<span class=\"errors\">" << toPrint << "</span>" << std::endl;
-            std::cout << toPrint << std::setw(30) << "Error: Invalid exponential number" << std::endl;
             break;
         }
     }
@@ -61,28 +77,24 @@ void printError(std::string toPrint, int qPosition, std::ostream& stream)
 void printInvalidChar(std::string toPrint, std::ostream& stream)
 {
     stream << "\t\t<span class=\"errors\">" << toPrint << "</span>" << std::endl;
-    std::cout << toPrint << std::setw(30) << "Error: Invalid character" << std::endl;
 }
 
 // Prints the set of chars as a variable
 void printVariable(std::string toPrint, std::ostream& stream)
 {
     stream << "\t\t<span class=\"identifiers\">" << toPrint << "</span>" << std::endl;
-    std::cout << toPrint << std::setw(30) << "Variable" << std::endl;
 }
 
 // Prints the set of chars as an integer number 
 void printInteger(std::string toPrint, std::ostream& stream)
 {
     stream << "\t\t<span class=\"numbers\">" << toPrint << "</span>" << std::endl;
-    std::cout << toPrint << std::setw(30) << "Entero" << std::endl;
 }
 
 // Prints the set of chars as a real decimal number
 void printReal(std::string toPrint, std::ostream& stream)
 {
     stream << "\t\t<span class=\"numbers\">" << toPrint << "</span>" << std::endl;
-    std::cout << toPrint << std::setw(30) << "Real" << std::endl;
 }
 
 // Prints the set of chars depending the operator
@@ -93,49 +105,41 @@ void printOperator(char toPrint, std::ostream& stream)
         case '=':
         {
             stream << "\t\t<span class=\"operators\">" << toPrint << "</span>" << std::endl;
-            std::cout << toPrint << std::setw(30) << "Asignacion" << std::endl;
             break;
         }
         case '+':
         {
             stream << "\t\t<span class=\"operators\">" << toPrint << "</span>" << std::endl;
-            std::cout << toPrint << std::setw(30) << "Suma" << std::endl;
             break;
         }
         case '-':
         {
             stream << "\t\t<span class=\"operators\">" << toPrint << "</span>" << std::endl;
-            std::cout << toPrint << std::setw(30) << "Resta" << std::endl;
             break;
         }
         case '*':
         {
             stream << "\t\t<span class=\"operators\">" << toPrint << "</span>" << std::endl;
-            std::cout << toPrint << std::setw(30) << "Multiplicacion" << std::endl;
             break;
         }
         case '/':
         {
             stream << "\t\t<span class=\"operators\">" << toPrint << "</span>" << std::endl;
-            std::cout << toPrint << std::setw(30) << "Division" << std::endl;
             break;
         }
         case '^':
         {
             stream << "\t\t<span class=\"operators\">" << toPrint << "</span>" << std::endl;
-            std::cout << toPrint << std::setw(30) << "Potencia" << std::endl;
             break;
         }
         case '(':
         {
             stream << "\t\t<span class=\"special-chars\">" << toPrint << "</span>" << std::endl;
-            std::cout << toPrint << std::setw(30) << "Parentesis de apertura" << std::endl;
             break;
         }
         case ')':
         {
             stream << "\t\t<span class=\"special-chars\">" << toPrint << "</span>" << std::endl;
-            std::cout << toPrint << std::setw(30) << "Parentesis de cierre" << std::endl;
             break;
         }
     }
@@ -145,46 +149,42 @@ void printOperator(char toPrint, std::ostream& stream)
 void printLogical(std::string toPrint, std::ostream& stream)
 {
     stream << "\t\t<span class=\"logicals\">" << toPrint << "</span>" << std::endl;
-    std::cout << toPrint << std::setw(30) << "Logico" << std::endl;
 }
 
 // Prints the set of chars as a symbol
 void printSymbol(std::string toPrint, std::ostream& stream)
 {
     stream << "\t\t<span class=\"symbols\">" << toPrint << "</span>" << std::endl;
-    std::cout << toPrint << std::setw(30) << "Simbolo" << std::endl;
 }
 
 // Prints the set of chars as a reserved word
 void printReservedWord(std::string toPrint, std::ostream& stream)
 {
     stream << "\t\t<span class=\"reserved-words\">" << toPrint << "</span>" << std::endl;
-    std::cout << toPrint << std::setw(30) << "Palabra reservada" << std::endl;
 }
 
 // Prints the set of chars as a comment
 void printComment(std::string toPrint, std::ostream& stream)
 {
     stream << "\t\t<span class=\"comments\">" << toPrint << "</span>" << std::endl;
-    std::cout << toPrint << std::setw(30) << "Comentario" << std::endl;
 }
 
 void lexerArithmetic(std::string fileName)
 {
-    std::ifstream expressionsFile;
-    std::ofstream outputFile;
-    std::string line;
+    std::ifstream expressionsFile;                                                                              // Input file given by user
+    std::ofstream outputFile;                                                                                   // Output file with the 
+    std::string line;                                                                                           // Current line that the DFA is reading
     std::string epsilon = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789=+-*/^_().#';\n\t ";   // All the elements that the language reads
     std::string q0 = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWZYZ0123456789=+-*/^()#';";               // All the possibly initial elements for this language
     std::string q1 = "0123456789.";                                                                             // All the elements accepted in q1
     std::string q2 = "0123456789eE";                                                                            // All the elements accepted in q2
     std::string q3 = "0123456789-";                                                                             // All the elements accepted in q3
     std::string numbers = "0123456789";                                                                         // All the elements accepted in q4 and q5
-    std::string q7 = "tfTF";                                                                                      // All the elements accepted in q7
+    std::string q7 = "tfTF";                                                                                    // All the elements accepted in q7
     std::string operators = "=+-*/^()";                                                                         // All the elements accepted in q10, q11, q12, q13, q14, q15, q16, and q17
     std::string comment = ";";                                                                                  // All the elements accepted in q18
     std::string q20 = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWZYZ0123456789_";                        // All the elements accepted in q20prueba
-    std::string delimiters = "+-*^()=/;\n\t ";                                                                 // All the elements that delimit a set of chars
+    std::string delimiters = "+-*^()=/;\n\t ";                                                                  // All the elements that delimit a set of chars
     std::string ignoreUnlessComment = "\n\t ";                                                                  // All the elements that wont appear in a set of chars, unless it's inside a comment
     std::string toPrint;                                                                                        // Stores the set of chars to print
     char current;                                                                                               // Stores the current char for reading
@@ -200,16 +200,8 @@ void lexerArithmetic(std::string fileName)
 
     // Open/Creates the output file
     outputFile.open("output.html", std::ios::out);
-    outputFile << "<!DOCTYPE html>" << std::endl;
-    outputFile << "<html lang=\"en\">" << std::endl;
-    outputFile << "<head>" << std::endl;
-    outputFile << "\t<meta charset=\"UTF-8\">" << std::endl;
-    outputFile << "\t<link rel=\"stylesheet\" href=\"styles.css\">" << std::endl;
-    outputFile << "\t<title>DFA SYNTATIC HIGHLIGHTER</title>" << std::endl;
-    outputFile << "</head>" << std::endl << std::endl;
-    outputFile << "<body>" << std::endl;
-    outputFile << "\t<main class=\"no-space\">" << std::endl;
-
+    printHtmlInfoAndOpeningTags(outputFile);
+    
     // Asks the name of the file to analyze until the user inputs it correctly
     while(expressionsFile.fail())
     {
@@ -217,11 +209,6 @@ void lexerArithmetic(std::string fileName)
         std::cin >> fileName;
         expressionsFile.open(fileName, std::ios::in);
     }
-    
-    // Info of devs
-    system("cls");
-    std::cout << "\n |-|-|      DFA SYNTATIC HIGHLIGHTER      |-|-|" << std::endl;
-    std::cout << "By: Aldo Degollado, Abraham Mendoza, and Alonso Martinez\n" << std::endl;
 
     // Read each line of the file
     while(expressionsFile.is_open() && !expressionsFile.eof())
@@ -680,14 +667,15 @@ void lexerArithmetic(std::string fileName)
                 }
             }
         }
+        // Prints an end of line in the output file
         outputFile << "\t\t<span><br></span>" << std::endl;
     }
-    outputFile << "\t</main>" << std::endl;
-    outputFile << "</body>" << std::endl;
-    outputFile << "</html>" << std::endl;
+    printHtmlClosingTags(outputFile);
 
     // Closes the file that the user provided
     expressionsFile.close();
+
+    // Closes the output file that we created
     outputFile.close();
 }
 
@@ -700,6 +688,8 @@ int main(void)
     std::cin >> fileName;
 
     lexerArithmetic(fileName);
+
+    std::cout << "\n\n\nThe analysis of your file has ended, thank for using our program!\n" << std::endl;
 
     return 0;
 }
