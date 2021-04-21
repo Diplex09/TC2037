@@ -36,45 +36,7 @@ void printHtmlClosingTags(std::ostream& stream)
 }
 
 // Prints the set of chars as an error depending on the state of the automaton from which it originated
-void printError(std::string toPrint, int qPosition, std::ostream& stream)
-{
-    switch(qPosition)
-    {
-        case 0:
-        {
-            stream << "\t\t<span class=\"errors\">" << toPrint << "</span>" << std::endl;
-            break;
-        }
-        case 1:
-        {
-            stream << "\t\t<span class=\"errors\">" << toPrint << "</span>" << std::endl;
-            break;
-        }
-        case 2:
-        {
-            stream << "\t\t<span class=\"errors\">" << toPrint << "</span>" << std::endl;
-            break;
-        }
-        case 7:
-        {
-            stream << "\t\t<span class=\"errors\">" << toPrint << "</span>" << std::endl;
-            break;
-        }
-        case 20:
-        {
-            stream << "\t\t<span class=\"errors\">" << toPrint << "</span>" << std::endl;
-            break;
-        }
-        default:
-        {
-            stream << "\t\t<span class=\"errors\">" << toPrint << "</span>" << std::endl;
-            break;
-        }
-    }
-}
-
-// Prints the set of chars as an error caused by an invalid char in the language 
-void printInvalidChar(std::string toPrint, std::ostream& stream)
+void printError(std::string toPrint, std::ostream& stream)
 {
     stream << "\t\t<span class=\"errors\">" << toPrint << "</span>" << std::endl;
 }
@@ -85,14 +47,8 @@ void printVariable(std::string toPrint, std::ostream& stream)
     stream << "\t\t<span class=\"identifiers\">" << toPrint << "</span>" << std::endl;
 }
 
-// Prints the set of chars as an integer number 
-void printInteger(std::string toPrint, std::ostream& stream)
-{
-    stream << "\t\t<span class=\"numbers\">" << toPrint << "</span>" << std::endl;
-}
-
-// Prints the set of chars as a real decimal number
-void printReal(std::string toPrint, std::ostream& stream)
+// Prints the set of chars as a number 
+void printNumber(std::string toPrint, std::ostream& stream)
 {
     stream << "\t\t<span class=\"numbers\">" << toPrint << "</span>" << std::endl;
 }
@@ -191,7 +147,6 @@ void lexerArithmetic(std::string fileName)
     int lineLength = 0;                                                                                         // Stores the total of chars in a line
     int qPosition = 0;                                                                                          // Stores the state of the automata
     bool readNextChar;                                                                                          // Determines if we read the next char
-    bool hasInvalidChar = false;                                                                                // Determines if a set of chars has a invalid one in the language
     bool hasError = false;                                                                                      // Determines if the set of chars has a mistake 
     bool isFirstChar = true;                                                                                    // Determines if the current char is the first char of a set
     bool symbolHasAtLeastOneChar = false;                                                                       // Determines if the current set of chars is a valid symbol
@@ -230,12 +185,11 @@ void lexerArithmetic(std::string fileName)
                 // Verify if the current character is a valid one in this language
                 if(epsilon.find(current) == std::string::npos)
                 {
-                    hasInvalidChar = true;
                     hasError = true;
                     readNextChar = true;
                 }
                 // Only the errors followed by a delimiter that are not inside a comment fail this if (this means that the error needs to be printed) 
-                if(!((hasInvalidChar || hasError) && (delimiters.find(current) != std::string::npos || i == lineLength - 1) && qPosition != 19))
+                if(!(hasError && (delimiters.find(current) != std::string::npos || i == lineLength - 1) && qPosition != 19))
                 {
                     // Switch the state of the automaton
                     switch(qPosition)
@@ -332,12 +286,12 @@ void lexerArithmetic(std::string fileName)
                                     // If qPosition = 2 it means that the set of chars is a decimal number without decimal part, so it prints the set of chars as a real number
                                     if(qPosition == 2)
                                     {
-                                        printReal(toPrint, outputFile);
+                                        printNumber(toPrint, outputFile);
                                     }
                                     // The set of chars is a integer number and it prints it as what it is
                                     else
                                     {
-                                        printInteger(toPrint, outputFile);
+                                        printNumber(toPrint, outputFile);
                                     }
                                     toPrint.clear();
                                     qPosition = 0;
@@ -396,7 +350,7 @@ void lexerArithmetic(std::string fileName)
                                     // The current set of chars is a valid decimal number
                                     else
                                     {
-                                        printReal(toPrint, outputFile);
+                                        printNumber(toPrint, outputFile);
                                         toPrint.clear();
                                         qPosition = 0;
                                     }
@@ -489,7 +443,7 @@ void lexerArithmetic(std::string fileName)
                                 // Verifies if there's an error in the current set of chars, if false, the set of chars prints as a exponential real number
                                 if(!hasError)
                                 {
-                                    printReal(toPrint, outputFile);
+                                    printNumber(toPrint, outputFile);
                                     toPrint.clear();
                                     qPosition = 0;
                                 }
@@ -572,7 +526,6 @@ void lexerArithmetic(std::string fileName)
                                 {
                                     hasError = true;
                                     readNextChar = false;
-                                    std::cout << "Hola" << std::endl;
                                 }
                             }
                             else
@@ -658,19 +611,10 @@ void lexerArithmetic(std::string fileName)
                         toPrint = toPrint + current;
                         readNextChar = true;
                     }
-                    // Verifies if the cause of the error was an invalid char in the language, if true, prints the set of chars as a invalid char error
-                    if(hasInvalidChar)
-                    {
-                        printInvalidChar(toPrint, outputFile);
-                        toPrint.clear();
-                        qPosition = 0;
-                        hasInvalidChar = false;
-                        hasError = false;
-                    }
                     // The cause of the error was a invalid char in a certain state of the automaton, therefore, it prints the set of chars as a certain error depending on the state of the automaton 
                     else
                     {
-                        printError(toPrint, qPosition, outputFile);
+                        printError(toPrint, outputFile);
                         toPrint.clear();
                         qPosition = 0;
                         hasError = false;
