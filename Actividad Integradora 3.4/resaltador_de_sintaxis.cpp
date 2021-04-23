@@ -173,6 +173,7 @@ void lexerArithmetic(std::string fileName)
         line = line + '\n';
         lineLength = line.length();
         isFirstChar = true;
+        hasError = false;
         qPosition = 0;
 
         // Read each character of the line
@@ -302,6 +303,7 @@ void lexerArithmetic(std::string fileName)
                             {
                                 toPrint = toPrint + current;
                                 hasError = true;
+                                readNextChar = true;
                             }
                             break;
                         }
