@@ -12,6 +12,7 @@
 #include <windows.h>
 #include <string>
 #include <iomanip>
+#include <chrono>
 
 // Prints the header and basic HTML tags in the output file
 void printHtmlInfoAndOpeningTags(std::ostream& stream)
@@ -644,9 +645,13 @@ int main(void)
     std::cout << "\nInput the name of the file to analyze (with extension): ";
     std::cin >> fileName;
 
+    auto t1 = std::chrono::high_resolution_clock::now();
     lexerArithmetic(fileName);
+    auto t2 = std::chrono::high_resolution_clock::now();
 
     std::cout << "\n\n\nThe analysis of your file has ended, thank for using our program!\n" << std::endl;
+    auto duration = std::chrono::duration_cast<std::chrono::seconds>(t2 - t1).count();
+    std::cout << "It took " << duration << " seconds." << std::endl;
 
     return 0;
 }
