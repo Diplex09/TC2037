@@ -1,1 +1,1 @@
-symbolHasAtLeastOneChar
+while(!readNextChar)
