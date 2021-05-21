@@ -12,20 +12,42 @@ public class MiHilo extends Thread {
     int id;
     int ciclos;
     boolean bandera;
+    int firstNum;
+    int lastNum;
     private long resultado;
     
-    MiHilo(int id, int ciclos, boolean bandera) {
+    MiHilo(int id, int ciclos, boolean bandera, int firstNum, int lastNum) {
         this.id = id;
         this.ciclos = ciclos;
         this.bandera = bandera;
+        this.firstNum = firstNum;
+        this.lastNum = lastNum;
+    }
+    
+    private boolean numberIsPrime(int num) {
+        if(num < 2) {
+            return false;
+        }
+        else {
+            boolean numIsPrime = true;
+            for(int i=2; i <= Math.sqrt(num); i++) {
+                if(num % i == 0) {
+                    numIsPrime = false;
+                    break;
+                }
+            }
+            return numIsPrime;
+        }
     }
     
     @Override
     public void run() {
-        System.out.println("START " + id);
-        long t1 = System.currentTimeMillis();
-        long t2 = System.currentTimeMillis();
-        this.resultado = (t2 - t1);
+        System.out.println("Hilo " + id + " empieza");
+        for(int i=this.firstNum; i < this.lastNum; i++){
+            if(numberIsPrime(i)){
+                this.resultado += i;
+            }
+        }
     }
     
     public long getResultado()

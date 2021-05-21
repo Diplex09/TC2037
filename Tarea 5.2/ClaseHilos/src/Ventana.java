@@ -71,15 +71,21 @@ public class Ventana extends javax.swing.JFrame {
         String s = jButton1.getText();
         if (s.compareTo("Push") == 0){
             long t1 = System.currentTimeMillis();
+            
             String entrada = jTextField1.getText();
-            System.out.println(entrada);
+            int nHilos = Integer.parseInt(entrada);
+            System.out.println("Número de hilos: " + entrada);
+            
+            int numsPerHilo = 5000000 / nHilos;
+            
             try{
-                int nHilos = Integer.parseInt(entrada);
                 MiHilo[] hilos = new MiHilo[nHilos];
-                for(int i=0; i <nHilos; i++){
-                    hilos[i] = new MiHilo(i, 1000 * i, true);
+                
+                for(int i=0; i < nHilos; i++){
+                    hilos[i] = new MiHilo(i, 1000 * i, true, i * numsPerHilo + 1, (i + 1) * numsPerHilo + 1);
                     hilos[i].start();
                 }
+                
                 long resultadoFinal = 0;
                 for(int i=0; i <nHilos; i++){
                     hilos[i].join();
@@ -93,7 +99,7 @@ public class Ventana extends javax.swing.JFrame {
                 System.out.println(ie);
             }
             long t2 = System.currentTimeMillis();
-            System.out.println("Tiempo final: " + (t2 - t1));
+            System.out.println("Tiempo final: " + (t2 - t1) + " milisegundos");
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
