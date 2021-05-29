@@ -33,6 +33,8 @@ nuestro autómata finito estaba realizando correctamente la clasificación que e
 pero a la última versión ya fue para categorías léxicas. Entonces eso fue de muchísima ayuda para poder tener 
 un autómata finito que estuviera en forma y cumpliera las expectativas de la situación promedio.
 
+
+
 Luis Alonso Martínez:
 - Automatas Finitos Deterministas y Gihub Desktop -
 
@@ -63,3 +65,55 @@ visibilidad de la evolución de los proyectos.
 Además de que tiene una búsqueda muy rápida en estructura de los repos,
 tiene una comunidad amplia, por lo que es muy fácil obtener ayuda, y
 tiene una fácil integración con servicios de terceros.
+
+
+
+Aldo Alejandro Degollado Padilla
+- C++, HTML, CSS y Visual Studio Code
+
+Hola, soy Aldo Degollado, como ya me presentó mi compañero Abraham y en este caso me toca platicarles de 4 herramientas 
+que son 3 lenguajes de programación y un IDE que nos ayudaron en nuestra realización de la situación problema 1. ¿Por qué 
+hablo solamente de la situación problema 1? Bueno, aunque en esta materia sí existen dos situaciones problemas, hasta el día 
+de hoy: 28 de mayo de 2021. Solamente hemos entregado la primera y por ende no podemos hablar de la que todavía no hacemos.
+
+Y si hablamos de las actividades normales del curso, por así decirlo, nos damos cuenta que estas en su gran mayoría fueron 
+realizadas con lenguajes formales como lo son Skin o Prolog o con DFA's. Ahora les voy a hablar un poco de nuestro primer lenguaje 
+de programación y el principal en nuestras actividades que fueron el analizador sintáctico y el resaltador sintáctico que fue C++, 
+nuestro lenguaje columna, nuestro lenguaje principal, por así decirlo. Este lenguaje como pueden ver, las ventajas que tienes que 
+es de alto desempeño, tienen un fácil manejo de memoria y es soportado en los IDE's más populares.
+
+Nosotros utilizamos Visual Studio Code, pero si hubiéramos utilizado CLion o Atom, también ahí lo hubiéramos podido editar. Es un 
+lenguaje bastante amigable en ese sentido. ¿Por qué escogimos ahora C++ más personalmente? Nosotros al principio estábamos pensando 
+entre C++, Python y Java. A Java la verdad es que nunca lo habíamos tratado, pero como nos dijeron que en algún punto de la materia 
+íbamos a tener que traducir de nuestro lenguaje, si es que no lo hacíamos con Java, a Java decidimos que a lo mejor sería una buena opción.
+
+Al final, hace poco nos enteramos que no iba a ser necesario traducirlo. Entonces, pues nos decidimos, por excluir a Java, porque 
+realmente no es un lenguaje del que tengamos tanto conocimiento. De igual forma, Python sí es un lenguaje que hemos trabajado tanto mi
+equipo como yo, pero no lo habíamos tocado desde el primer semestre y C++ lo veníamos tocando en todos los semestres y lo seguimos 
+tocando ahorita todavía. Y fue por eso que escogimos este. También fue porque nosotros ya tenemos un conocimiento amplio de las bibliotecas
+que tiene C++ y sabíamos más o menos cuáles íbamos a tener que utilizar.
+
+Ahora les voy a hablar un poco de HTML y CSS, que comúnmente se ven como un solo lenguaje, por así decirlo, aunque no, o sea, es un 
+conjunto que se complementan muy bien. Y pues las cualidades de estos lenguajes es que son de fácil aprendizaje, los documentos son más
+limpios porque puedes dividir tanto el contenido de la página web que quieres hacer en HTML con el estilo que quieres que tenga la página
+web en el CSS y que son compatibles con múltiples navegadores.
+
+Esto lo primero es lo que acabo de mencionar. Nos permitió tener un código más limpio, más estructurado, mejor dividido. Y lo mejor de
+todo fue que para el resaltador de sintaxis, que fue para el único que utilizamos estos dos lenguajes, nos ayudó a ver de una manera
+mucho más visual las palabras coloreadas que fue lo que hacía el resaltador. A las palabras clave las ponía de cierto color, errores de
+otro y cosas por el estilo. Y con el CSS eso era bastante sencillo, entonces nos facilitó mucho la tarea.
+
+Y por último, les voy a hablar del IDE que nosotros utilizamos, que es Visual Studio Code. Este IDE tiene soporte nativo para múltiples
+lenguajes de programación. Tienen una biblioteca de extensiones que nos fue de mucha utilidad y tienen una configuración de interfaz que
+también es buena, aunque no es algo que nos haya decantado por este IDE. Ahora, ¿por qué hablaba de la biblioteca de extensiones? 
+Bueno, en particular hubo dos extensiones que a nosotros nos funcionaron bastante bien, que fue la llamada Code Runner.
+
+En lo que nos ayudó fue que podíamos ejecutar el documento CPP sin tener que meternos al JSON para ejecutarlo en nosotros mismos y era
+con la ayuda de un simple botoncito que nos permitía ver el resultado de nuestro código.  También utilizamos otra que se llamaba, o se
+llama más bien, Git Lens. ¿Para qué te sirve Git Lens? En cada línea de código, te pone después donde termina el texto del código.
+Quién fue la última persona de ese repositorio que editó esa línea del código y cuándo fue.
+
+Entonces así nosotros podíamos ir viendo ah, mira, fulanito de tal editó esta parte del código y ya le metió tal cosa. Ah muy bien.
+Entonces eso ya no lo tengo que hacer. O en su defecto al revés, ¿no? Y eso nos ayudó bastante y pues bueno, estas fueron tres de las
+herramientas más importantes que nosotros utilizamos. Espero les haya gustado y eso fue todo. Muchas gracias.
+
