@@ -1,0 +1,65 @@
+- Introducción del poster, el objetivo del video y presentación de los integrantes del equipo -
+
+Abraham Mendoza Pérezprimera parte:
+- Diagrams y JSFlap -
+
+Primero empezamos por diagrams.net, el cual solo lo usamos solo para crear el diagrama de autómata finito, 
+el cual fue que optamos para poder llegar a la resolución de la situación problema aunque es importante 
+recalcar que no solo se queda en hacer este tipo de diagrama, sino que  como su nombre lo indica, diagrams.net
+nos ofrece una variedad. Bastante grande, de distintos diagramas, entre los cuales puedo mencionar diagramas UML, 
+entre los cuales pueden estar diagramas, estado, diagramas de casos, actividades, muchos de los cuales son para 
+un aspecto más técnico. Esto se puede ver al momento de estar trabajando en códigos que ya estén terminados 
+o incluso que estén en proceso, los cuales nos permiten analizar de mejor manera cómo es que se comportan estos. 
+Y esto también facilita mucho el trabajo en equipo, ya que se puede exponer de la mejor manera y como es que este 
+propio código funciona. Y esto no solo se queda así, ya que uno de las cosas que ofrece esta herramienta es poder 
+trabajar con herramientas como Github, Gitlab o Dropbox, ya que en estas ofrece actualizaciones de los templates 
+de la página, por ejemplo en Github cada vez que hay un nuevo diagrama llegan al repositorio de la herramienta 
+donde se van lanzando ideas, actualizaciones entonces creemos que es algo de bastante ayuda, ya que Github es algo 
+con lo que hemos estaod trabajando en estos en estos últimos años de nuestra carrera.
+
+De igual manera cuenta con otras ventajas las cuales son tener Google Drive y  Google Workspace, ya que el poder 
+está trabajando de manera colaborativa al no estar en el mismo lugar creemos que es de bastante ayuda y por ejemplo 
+al estar en esta modalidad en línea pues resulta bastante ventajoso para todos los miembros del equipo. 
+Eso sería por aparte de diagram.net.
+
+
+Las siguientes herramientas que utilizamos fue JFLAP. Como tal, este consiste en un programa que se corre Java 
+en el cual nos ofrece el crear nuestros propios lenguajes formales. Entre estos lenguajes formales vamos a encontrar 
+que son expresiones regulares máquinas de turing, máquinas de moore y obviamente lo que nosotros necesitamos 
+es el autómata finito. Y lo interesante es que aparte de construir, se nos ofrece la opción de que podamos revisar 
+entradas en este mismo autómata finito y de acuerdo a las condiciones que se les haya dado por proceso para poder 
+pasar las siguientes transiciones.Es que va funcionando. Entonces esto nos ayudó muchísimo para ir probando si 
+nuestro autómata finito estaba realizando correctamente la clasificación que en primer lugar fueron tokens, 
+pero a la última versión ya fue para categorías léxicas. Entonces eso fue de muchísima ayuda para poder tener 
+un autómata finito que estuviera en forma y cumpliera las expectativas de la situación promedio.
+
+Luis Alonso Martínez:
+- Automatas Finitos Deterministas y Gihub Desktop -
+
+Como lo mencionó mi compañero Abraham, para la situación problema estuvimos 
+trabajando con el concepto de Autómatas Finitos Deterministas para
+realizar el analizador léxico, que consiste en recibir una cadena de entrada
+y va procesando los símbolos de entrada de uno a la vez. Su funcionamiento
+comienza en la posición del estado inicial, y desde este estado comienza su
+ejecución. Entonces utilizamos todo este concepto dónde empieza en este estado
+inicial y va pasando por los estados dependiendo del caractér con el que se 
+encuentra hasta llegar a un estado final que representa una categoría del lenguaje
+que se está analizando. 
+
+Entonces terminamos utilizando este método porque creemos que es fácil de comprender
+ya que es un lenguaje universal, además de que creemos que su elaboración
+o implementación es sencilla, el trasladar este concepto que ya platicamos
+a código realmente no es algo muy díficil, ya que las definiciones y conceptos 
+son muy claros.
+
+Para la parte de trabajo colaborativo nosotros usamos y recomendamos 
+ampliamente el uso de GitHub, principalmente aprovechndor su herramienta de
+GitHub Desktop porque te brinda una interfaz que la verdad es que es muy 
+sencillo de utilizar, y la visualización de las modificaciones que realizas 
+es bastante útil a la hora de realizar cualquier proyecto en equipo, ya que además de 
+ver los cambios que han realizado los demás colaboradores, puedes ver
+cuáles son los cambios que vas a subir en el commit, lo que da una mejor
+visibilidad de la evolución de los proyectos.
+Además de que tiene una búsqueda muy rápida en estructura de los repos,
+tiene una comunidad amplia, por lo que es muy fácil obtener ayuda, y
+tiene una fácil integración con servicios de terceros.
