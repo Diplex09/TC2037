@@ -8,5 +8,5 @@
 
 ## Featured projects
 - [Syntactic analyzer](./Tarea3.2)
-- [Syntactic highlighter of Scheme language](./Actividad Integradora 3.4)
-- [Syntactic highlighter of Scheme language using threads](./Actividad Integradora 5.3)
+- [Syntactic highlighter of Scheme language](/ActividadIntegradora3.4)
+- [Syntactic highlighter of Scheme language using threads](./ActividadIntegradora5.3)
